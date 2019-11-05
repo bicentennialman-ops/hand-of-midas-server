@@ -7,7 +7,10 @@ export const CategorySchema = new Schema(
             required:true
         },
         type:{
-            type:Number,//0: Dept&Loan   -1: expense  1: income
+            type:Number,//0: Loan,Debt   -1: expense  1: income
+        },
+        bias:{
+            type:Number
         },
         avatar:{
             type:String,

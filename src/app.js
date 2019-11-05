@@ -3,7 +3,11 @@ import config from './config'
 import bodyParser from 'body-parser'
 import connectDb from './models'
 import User from './controllers/user'
+import Wallet from './controllers/wallet'
+import Exchange from './controllers/exchange'
 import Category from './controllers/category'
+import UploadFile from './controllers/upload-file'
+import CurrencyUnit from './controllers/currency-unit'
 import passport from 'passport'
 import passportJWT from 'passport-jwt'
 import {User as UserDB} from './models'
@@ -17,7 +21,6 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
 jwtOptions.secretOrKey = config.security.jwtSecret;
 
 var strategy = new JwtStrategy(jwtOptions, async (jwtPayload, next)=> {
-  console.log('payload received', jwtPayload);
   const user = await UserDB.findById(jwtPayload.id)
   if (user) {
     next(null, user);
@@ -39,7 +42,18 @@ app.post('/api/register',User.register)
 app.post('/api/login',User.login)
 app.get('/api/getUserInfor',passport.authenticate('jwt', { session: false }),User.getUserInfor)
 
-app.post('/api/addCategory',Category.addCategory)
+app.post('/api/addCategory',passport.authenticate('jwt', { session: false }),Category.addCategory)
+
+app.post('/api/addCurrencyUnit',CurrencyUnit.addCurrentUnit)
+
+app.post('/api/addWallet',Wallet.addWallet)
+app.get('/api/getWallet',Wallet.getWallet)
+app.get('/api/getListWallets',passport.authenticate('jwt', { session: false }),Wallet.getListWallets)
+
+app.post('/api/addExchange',passport.authenticate('jwt', { session: false }),Exchange.addExchange)
+app.get('/api/getListExchanges',passport.authenticate('jwt', { session: false }),Exchange.getListExchanges)
+app.post('/api/uploadImagesExchange',UploadFile.uploadImagesExchangeMulter.array("images",12),UploadFile.uploadImagesExchange)
+
 const PORT = config.server.port;
  
 connectDb().then(()=>{

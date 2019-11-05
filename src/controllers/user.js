@@ -35,9 +35,9 @@ const getUserInfor = (req,res)=>{
    if (!req.user)
         res.status(401).json({message:"You didn't login."})
     else {
-        const {username,email,name}=req.user
+        const {username,email,name,id}=req.user
         res.json({
-            username,email,name
+            username,email,name,id
         })
     }
    

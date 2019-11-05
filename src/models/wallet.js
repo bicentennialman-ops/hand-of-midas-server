@@ -8,7 +8,12 @@ export const WalletSchema = new Schema(
             required:true
         },
         type:{
-            type:Number,
+            type:Number,//1 normal , 2 saving
+            required:true
+        },
+        currencyUnit:{
+            type:Schema.Types.ObjectId,
+            ref:'CurrencyUnit',
             required:true
         },
         avatar:{
@@ -42,6 +47,13 @@ export const WalletSchema = new Schema(
             type:Date,
             default:Date.now,
             required:true
+        },
+        starteDate:{
+            type:Date,
+            default:Date.now
+        },
+        endDate:{
+            type:Date
         }
     }
 )

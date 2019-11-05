@@ -24,13 +24,12 @@ export const ExchangeSchema=new Schema(
         },
         withPerson:{
             name:{
-                type:String,
-                required:true
+                type:String
             },
             phoneNumber:{
                 type:String
             },
-            userAccount:{
+            user:{
                 type:Schema.Types.ObjectId,
                 ref:'User'
             }
@@ -50,7 +49,10 @@ export const ExchangeSchema=new Schema(
             long:{
                 type:String
             }
-        }
+        },
+        images:[{
+            type:String
+        }]
     }   
 )
 
