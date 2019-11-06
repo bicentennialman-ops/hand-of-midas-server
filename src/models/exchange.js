@@ -1,59 +1,64 @@
-import mongoose,{Schema} from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
-export const ExchangeSchema=new Schema(
+export const ExchangeSchema = new Schema(
     {
-        money:{
-            type:Number,
-            required:true
+        money: {
+            type: Number,
+            required: true
         },
-        category:{
-            type:Schema.Types.ObjectId,
-            ref:'Category'
+        category: {
+            type: Schema.Types.ObjectId,
+            ref: 'Category'
         },
-        wallet:{
-            type:Schema.Types.ObjectId,
-            ref:'Wallet'
+        wallet: {
+            type: Schema.Types.ObjectId,
+            ref: 'Wallet'
         },
-        note:{
-            type:String
+        note: {
+            type: String
         },
-        dateCreate:{
-            type:Date,
-            default:Date.now,
-            required:true
+        userCreate: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
         },
-        withPerson:{
-            name:{
-                type:String
+        dateCreate: {
+            type: Date,
+            default: Date.now,
+            required: true
+        },
+        withPerson: {
+            name: {
+                type: String
             },
-            phoneNumber:{
-                type:String
+            phoneNumber: {
+                type: String
             },
-            user:{
-                type:Schema.Types.ObjectId,
-                ref:'User'
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
             }
         },
-        date:{
-            type:Date,
-            default:Date.now,
-            required:true
+        date: {
+            type: Date,
+            default: Date.now,
+            required: true
         },
-        position:{
-            name:{
-                type:String
+        position: {
+            name: {
+                type: String
             },
-            lat:{
-                type:String
+            lat: {
+                type: String
             },
-            long:{
-                type:String
+            long: {
+                type: String
             }
         },
-        images:[{
-            type:String
+        images: [{
+            type: String
         }]
-    }   
+    }
 )
 
-export default mongoose.model('Exchange',ExchangeSchema)
+export default mongoose.model('Exchange', ExchangeSchema)

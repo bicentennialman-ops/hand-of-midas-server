@@ -5,7 +5,7 @@ import Category from '../models/category'
 
 const addExchange = (req, res) => {
     const exchange = req.body
-    Wallet.findOne({ $and: [{ _id: exchange.wallet }, { "users.user": req.user._id }]}).populate("users.user").then(wallet => {
+    Wallet.findOne({ $and: [{ _id: exchange.wallet }, { "users.user": req.user._id }] }).populate("users.user").then(wallet => {
         if (!wallet)
             res.status(200).json({ message: "No find wallet." });
         else {
@@ -16,6 +16,7 @@ const addExchange = (req, res) => {
                         res.status(200).json({ message: "No find category." });
                     else {
                         exchange.money = category.bias * exchange.money
+                        exchange.userCreate = user._id
                         Exchange.create(exchange).then(document => {
                             res.status(200).json(document)
                         }).catch(err => res.status(200).json(err))
@@ -31,7 +32,7 @@ const getListExchanges = (req, res) => {
         if (!wallet)
             res.status(200).json({ message: "No find wallet." });
         else {
-            Exchange.find({ wallet: req.body.wallet }).populate("category").then(exchanges => {
+            Exchange.find({ wallet: req.body.wallet }).populate("category").populate("userCreate","name email username").then(exchanges => {
                 res.status(200).json(exchanges)
             }).catch(err => res.status(200).json(err))
         }
