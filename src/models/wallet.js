@@ -57,7 +57,7 @@ export const WalletSchema = new Schema(
             default: Date.now,
             required: true
         },
-        starteDate: {
+        startDate: {
             type: Date,
             default: Date.now
         },

@@ -6,6 +6,9 @@ export const CategorySchema = new Schema(
             type:String,
             required:true
         },
+        name:{
+            type:String
+        },
         type:{
             type:Number,//0: Loan,Debt   -1: expense  1: income
         },
