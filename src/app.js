@@ -44,12 +44,13 @@ app.get('/api/renewToken', passport.authenticate('jwt', { session: false }), Use
 app.get('/api/getUserInfor', passport.authenticate('jwt', { session: false }), User.getUserInfor)
 
 app.post('/api/addCategory', passport.authenticate('jwt', { session: false }), Category.addCategory)
+app.get('/api/getCategories', Category.getCategories);
 
 app.post('/api/addCurrencyUnit', CurrencyUnit.addCurrencyUnit)
 app.get('/api/getCurrencyUnits', CurrencyUnit.getCurrencyUnits)
 
-app.post('/api/addWallet', Wallet.addWallet)
-app.get('/api/getWallet', Wallet.getWallet)
+app.post('/api/addWallet', passport.authenticate('jwt', { session: false }), Wallet.addWallet)
+app.get('/api/getWallet', passport.authenticate('jwt', { session: false }), Wallet.getWallet)
 app.get('/api/getListWallets', passport.authenticate('jwt', { session: false }), Wallet.getListWallets)
 
 app.post('/api/addExchange', passport.authenticate('jwt', { session: false }), Exchange.addExchange)

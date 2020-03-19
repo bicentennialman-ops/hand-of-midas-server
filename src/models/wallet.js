@@ -63,7 +63,12 @@ export const WalletSchema = new Schema(
         },
         endDate: {
             type: Date
-        }
+        },
+        firstMoney: {
+            type: Number,
+            default: 0,
+            required: true
+        },
     }
 )
 

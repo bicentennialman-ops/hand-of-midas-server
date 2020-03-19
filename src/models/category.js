@@ -1,40 +1,40 @@
-import mongoose, {Schema} from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 export const CategorySchema = new Schema(
     {
-        code:{
-            type:String,
-            required:true
+        code: {
+            type: String,
+            required: true
         },
-        name:{
-            type:String
+        name: {
+            type: String
         },
-        type:{
-            type:Number,//0: Loan,Debt   -1: expense  1: income
+        type: {
+            type: Number,//-1: Loan,Debt   0 expense  1: income
         },
-        bias:{
-            type:Number
+        bias: {
+            type: Number
         },
-        avatar:{
-            type:String,
-            required:true,
-            trim:true
+        avatar: {
+            type: String,
+            required: true,
+            trim: true
         },
-        createDate:{
-            type:Date,
-            required:true,
-            default:Date.now
+        createDate: {
+            type: Date,
+            required: true,
+            default: Date.now
         },
-        user:{
-            type:Schema.Types.ObjectId,
-            ref:'User'
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         },
-        parent:{
-            type:Schema.Types.ObjectId,
-            ref:'Category'
+        parent: {
+            type: Schema.Types.ObjectId,
+            ref: 'Category'
         }
     }
 )
 
 
-export default mongoose.model('Category',CategorySchema)
+export default mongoose.model('Category', CategorySchema)

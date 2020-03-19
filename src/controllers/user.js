@@ -18,7 +18,8 @@ const login = async (req, res) => {
             var token = jwt.sign(payload, config.security.jwtSecret, {
                 expiresIn: 604800 // 1 week
             })
-            User.updateOne({ _id: user.id }, { $set: { activeTime: payload.activeTime } }).then(() => {
+            User.updateOne({ _id: user.id }, { $set: { activeTime: payload.activeTime } }).then((user) => {
+                delete user.password;
                 res.status(200).json({ message: 'ok', token: 'JWT ' + token })
             })
 
@@ -54,7 +55,7 @@ const getUserInfor = (req, res) => {
     else {
         const { username, email, name, _id } = req.user
         res.json({
-            username, email, name, _id
+            username, email, name, sid: _id
         })
     }
 
